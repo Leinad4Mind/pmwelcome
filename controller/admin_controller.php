@@ -140,7 +140,7 @@ class admin_controller
 		}
 		else
 		{
-			$user_link = '<a href="' . append_sid("{$this->root_path}memberlist.$this->php_ext", 'mode=viewprofile&amp;u=' . $sender_info['user_id']) . '" target="_blank">' . $sender_info['username'] . '</a>';
+			$user_link = get_username_string('full', $sender_info['user_id'] ?? ANONYMOUS, $sender_info['username'] ?? $this->language->lang('GUEST'), $sender_info['user_colour'] ?? '');
 		}
 
 		$pmwelcome_subject = $this->request->variable('pmwelcome_subject', $this->config['pmwelcome_subject'], true);
