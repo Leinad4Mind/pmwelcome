@@ -56,7 +56,7 @@ class pmwelcome
 	{
 		$sender_info = [];
 
-		$sql = 'SELECT user_id, username
+		$sql = 'SELECT user_id, username, user_colour
 			FROM ' . USERS_TABLE . "
 			WHERE user_id = " . (int) $user_id . ' AND user_type <> ' . USER_IGNORE;
 		$result = $this->db->sql_query($sql);
@@ -79,7 +79,7 @@ class pmwelcome
 			else
 			{
 				$json = new JsonResponse(array(
-					'sender_link'     => '<a href="' . append_sid("{$this->root_path}memberlist.$this->php_ext", 'mode=viewprofile&amp;u=' . $sender_info['user_id']) . '" target="_blank">' . $sender_info['username'] . '</a>',
+					'sender_link'     => get_username_string('full', $sender_info['user_id'] ?? ANONYMOUS, $sender_info['username'] ?? $this->language->lang('GUEST'), $sender_info['user_colour'] ?? ''),
 				));
 			}
 			return $json;
